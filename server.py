@@ -1,4 +1,5 @@
 import sqlite3
+import re
 from datetime import datetime
 
 from flask import Flask, render_template
@@ -14,6 +15,8 @@ def hello_world():
 @app.route("/tree/<tree_id>")
 def get_tree():
     conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
+    if re.search("^[0-9]+$") is None:
+       return "Tree not found.", 400
     return conn.execute(f'SELECT * FROM trees WHERE OBJECTID={tree_id}').fetchall()
 
 
