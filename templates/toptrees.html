@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>top trees!</title>
+    </head>
+    <body>
+	<h1>Tops for {{myvariety}} trees!</h1>
+        <ul>
+            {% for species in specieslist %}
+            <li>{{species}}</li>
+            {% endfor %}
+        </ul>
+        <h1>Top Tree Types!</h1>
+        <p>Here are some popular tree lists:</p>
+        <ul>
+            {% for variety in varieties %}
+            <li><a href="/toptrees/{{variety}}">{{variety}}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
