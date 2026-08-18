@@ -10,7 +10,9 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
-    return conn.execute("SELECT * FROM trees LIMIT 5").fetchall()
+    data = conn.execute("SELECT OBJECTID FROM trees LIMIT 10").fetchall()
+    trees = [{id: row[0]} for row in data]
+    return render_template("index.html", trees=trees)
 
 
 @app.route("/tree/<tree_id>")
