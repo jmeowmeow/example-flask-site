@@ -2,7 +2,7 @@ import re
 import sqlite3
 from datetime import datetime
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -10,9 +10,12 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
-    data = conn.execute("SELECT OBJECTID FROM trees LIMIT 10").fetchall()
+    page = request.args.get("page") or 0
+    data = conn.execute(
+        f"SELECT OBJECTID FROM trees OFFSET {page * 10} LIMIT 10"
+    ).fetchall()
     trees = [row[0] for row in data]
-    return render_template("index.html", trees=trees)
+    return render_template("index.html", trees=trees, page=page)
 
 
 @app.route("/tree/<tree_id>")
