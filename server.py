@@ -12,7 +12,7 @@ def hello_world():
     conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
     page = request.args.get("page") or 0
     data = conn.execute(
-        f"SELECT OBJECTID FROM trees OFFSET {page * 10} LIMIT 10"
+        f"SELECT OBJECTID FROM trees LIMIT 10 OFFSET {page * 10}"
     ).fetchall()
     trees = [row[0] for row in data]
     return render_template("index.html", trees=trees, page=page)
