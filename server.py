@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
-    page = request.args.get("page") or 0
+    page = int(request.args.get("page")) or 0
     data = conn.execute(
         f"SELECT OBJECTID FROM trees LIMIT 10 OFFSET {page * 10}"
     ).fetchall()
