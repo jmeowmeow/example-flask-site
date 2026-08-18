@@ -1,14 +1,15 @@
+import sqlite3
 from datetime import datetime
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello_world():
-    print("new web request")
-    return f"This is Andrew!!! the datetime is {datetime.now()}"
+    conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
+    return conn.execute('SELECT name FROM sqlite_schema WHERE type="table"').fetchall()
 
 
 if __name__ == "__main__":
