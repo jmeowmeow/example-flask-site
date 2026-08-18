@@ -38,5 +38,9 @@ def get_top_trees(myvariety):
     specieslist = [row[0] for row in data]
     return render_template("toptrees.html", myvariety=myvariety, specieslist=specieslist, varieties=varieties)
 
+@app.route("/toptrees/")
+def get_top_trees_default():
+    get_top_trees("elm")
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
