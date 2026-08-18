@@ -13,7 +13,7 @@ def hello_world():
     return conn.execute('SELECT * FROM trees LIMIT 5').fetchall()
 
 @app.route("/tree/<tree_id>")
-def get_tree():
+def get_tree(tree_id):
     conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
     if re.search("^[0-9]+$") is None:
        return "Tree not found.", 400
