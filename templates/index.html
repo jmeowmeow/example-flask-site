@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>trees!</title>
+    </head>
+    <body>
+        <h1>Trees!</h1>
+        <p>Here are some trees to peruse:</p>
+        <ul>
+            {% for tree in trees %}
+            <li><a href="/tree/{{tree.id}}">{{tree.id}}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
