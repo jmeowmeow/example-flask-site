@@ -11,6 +11,11 @@ def hello_world():
     conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
     return conn.execute('SELECT * FROM trees LIMIT 5').fetchall()
 
+@app.route("/tree/<tree_id>")
+def get_tree():
+    conn = sqlite3.connect("/data/trees/trees.db", isolation_level=None)
+    return conn.execute(f'SELECT * FROM trees WHERE OBJECTID={tree_id}').fetchall()
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
