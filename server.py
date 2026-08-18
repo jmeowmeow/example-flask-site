@@ -40,7 +40,7 @@ def get_top_trees(myvariety):
 
 @app.route("/toptrees/")
 def get_top_trees_default():
-    get_top_trees("elm")
+    return get_top_trees("elm")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
